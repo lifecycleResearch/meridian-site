@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+  <title>Meridian — Client Retention Service</title>
+  <meta name="description" content="Presence without pressure. The only full-service client retention company built for the premier real estate agent.">
+  <link rel="icon" type="image/png" href="meridian-logo.png">
+  <link rel="apple-touch-icon" href="meridian-logo.png">
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#11141d">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Meridian">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #C9A84C;
+      --gold-lt: #e8c87a;
+      --dark: #0d0f18;
+      --dark-card: #1a1611;
+      --cream: #f0ebe0;
+      --cream-warm: #f5f0e6;
+      --cream-dim: #d4cfc6;
+      --text: #1d232a;
+      --text-muted: #6b7280;
+      --text-dim: #8a8a9a;
+      --text-light: #EDE8DC;
+      --radius: 10px;
+      --gold-grad: linear-gradient(135deg, #C9A84C 0%, #e8c87a 50%, #C9A84C 100%);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    h1, h2, h3, h4 { font-family: "Playfair Display", Georgia, serif; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* ═══════════ HEADER ═══════════ */
+    .header {
+      background: var(--cream);
+      padding: 20px 24px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      border-bottom: 1px solid rgba(29,35,42,0.06);
+    }
+    .header-l { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .header-logo { width: 52px; height: 52px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .header-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .header-tag .eyebrow { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .header-tag .title { font-size: 14px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text); font-family: "Playfair Display", Georgia, serif; white-space: nowrap; margin-top: 2px; }
+    .header-tag .sub { font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); margin-top: 1px; }
+    .header-r { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
+    .header-login { font-size: 11px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text); transition: color 0.2s; }
+    .header-login:hover { color: var(--gold); }
+    .header-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--gold);
+      color: var(--text);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 11px 18px; border-radius: 4px;
+      transition: background 0.2s;
+    }
+    .header-cta:hover { background: var(--gold-lt); }
+    .header-cta svg { width: 11px; height: 11px; }
+
+    /* ═══════════ HERO ═══════════ */
+    .hero {
+      background: var(--cream);
+      padding: 40px 0 60px;
+      overflow: hidden;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+      align-items: center;
+    }
+    .hero h1 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-weight: 400;
+      font-size: clamp(56px, 11vw, 120px);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 22px;
+    }
+    .hero h1 .italic { font-style: italic; color: var(--gold); display: block; }
+    .hero-sub { max-width: 360px; }
+    .hero-sub p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+    .hero-sub p em { color: var(--text); font-style: normal; font-weight: 500; }
+    .hero-ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 26px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: var(--gold); color: var(--text); }
+    .btn-primary:hover { background: var(--gold-lt); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--text); }
+    .btn-ghost:hover { background: var(--text); color: var(--cream); }
+    .btn svg { width: 11px; height: 11px; }
+
+    .hero-image {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      background: var(--cream-warm);
+      border: 1px solid rgba(29,35,42,0.06);
+      overflow: hidden;
+    }
+    .hero-image img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-corner {
+      position: absolute;
+      width: 32px; height: 32px;
+      border: 2px solid var(--gold);
+    }
+    .hero-corner.tl { top: 0; left: 0; border-right: 0; border-bottom: 0; }
+    .hero-corner.tr { top: 0; right: 0; border-left: 0; border-bottom: 0; }
+    .hero-corner.bl { bottom: 0; left: 0; border-right: 0; border-top: 0; }
+    .hero-corner.br { bottom: 0; right: 0; border-left: 0; border-top: 0; }
+
+    /* ═══════════ QUOTE BAND ═══════════ */
+    .quote-band {
+      background: var(--cream);
+      padding: 36px 24px 44px;
+      text-align: center;
+      border-top: 1px solid rgba(29,35,42,0.06);
+      border-bottom: 1px solid rgba(29,35,42,0.06);
+    }
+    .quote-band p {
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      font-size: clamp(18px, 2.5vw, 26px);
+      line-height: 1.4;
+      color: var(--text);
+      max-width: 740px;
+      margin: 0 auto;
+    }
+    .quote-band p em { color: var(--gold); font-style: italic; font-weight: 500; }
+
+    /* ═══════════ PRICING ═══════════ */
+    .pricing { background: var(--cream); padding: 56px 0 64px; }
+    .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+    .plan {
+      background: #fff;
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 8px;
+      padding: 36px 28px 32px;
+      text-align: center;
+      position: relative;
+    }
+    .plan.featured { border-width: 2px; border-color: var(--gold); }
+    .plan-badge {
+      position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--text); color: var(--gold);
+      font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 999px;
+      font-weight: 700; white-space: nowrap;
+    }
+    .plan-icon {
+      width: 36px; height: 36px;
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--gold); margin-bottom: 14px;
+    }
+    .plan-icon svg { width: 26px; height: 26px; }
+    .plan-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 22px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .plan-tag { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; }
+    .plan-price {
+      display: flex; align-items: flex-start; justify-content: center; gap: 4px;
+      font-family: "Playfair Display", Georgia, serif;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .plan-price .dollar { font-size: 20px; font-weight: 600; margin-top: 6px; }
+    .plan-price .amount { font-size: 52px; font-weight: 700; line-height: 1; }
+    .plan-fee { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 18px; }
+    .plan-divider { width: 32px; height: 1px; background: var(--gold); margin: 0 auto 18px; }
+    .plan-desc { font-size: 13px; line-height: 1.65; color: var(--text); max-width: 280px; margin: 0 auto 24px; }
+    .plan-cta { width: 100%; }
+
+    /* ═══════════ TIMELINE ═══════════ */
+    .timeline { background: var(--cream); padding: 40px 0 56px; border-top: 1px solid rgba(29,35,42,0.06); }
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px 16px;
+    }
+    .step { text-align: center; position: relative; }
+    .step-image {
+      aspect-ratio: 4 / 3;
+      background: var(--cream-warm);
+      border-radius: 4px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .step-image img { width: 100%; height: 100%; object-fit: cover; }
+    .step-image::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.18) 100%);
+      pointer-events: none;
+    }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      border: 1.5px solid var(--gold); color: var(--gold);
+      font-size: 11px; font-weight: 700;
+      background: var(--cream);
+      margin-bottom: 8px;
+    }
+    .step-name {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .step-desc { font-size: 11px; color: var(--text-muted); line-height: 1.5; padding: 0 4px; }
+
+    /* ═══════════ FIVE-COLUMN ═══════════ */
+    .fivecol {
+      background: #fff;
+      padding: 56px 0;
+      border-top: 1px solid rgba(29,35,42,0.06);
+      border-bottom: 1px solid rgba(29,35,42,0.06);
+    }
+    .fivecol-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+    .col-icon {
+      display: flex; align-items: center; gap: 8px;
+      color: var(--gold);
+      font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .col-icon svg { width: 18px; height: 18px; }
+    .col p {
+      font-size: 13px; line-height: 1.7; color: var(--text); margin-bottom: 8px;
+    }
+    .col p:last-child { margin-bottom: 0; }
+    .col .col-list { padding-left: 0; list-style: none; }
+    .col .col-list li {
+      font-size: 13px; line-height: 1.7; color: var(--text); margin-bottom: 8px;
+      display: flex; gap: 8px;
+    }
+    .col .col-list li::before {
+      content: ''; flex-shrink: 0;
+      width: 16px; height: 1px; background: var(--gold); margin-top: 11px;
+    }
+    .col .col-italic {
+      font-family: "Playfair Display", Georgia, serif;
+      font-style: italic;
+      color: var(--gold);
+      font-size: 14px;
+      margin-top: 8px;
+    }
+
+    /* ═══════════ DARK BAND (Presence Without Pressure) ═══════════ */
+    .band {
+      background: var(--dark);
+      color: var(--text-light);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .band-kicker {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .band-domain { font-size: 10px; letter-spacing: 0.3em; color: var(--text-dim); }
+
+    /* ═══════════ CTA: GET STARTED FREE ═══════════ */
+    .get-started {
+      background: var(--dark);
+      color: var(--text-light);
+      padding: 60px 24px 100px;
+      text-align: center;
+    }
+    .get-started h2 {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: clamp(36px, 6vw, 60px);
+      font-weight: 400;
+      color: var(--text-light);
+      margin-bottom: 14px;
+    }
+    .get-started p { font-size: 13px; color: var(--text-dim); max-width: 360px; margin: 0 auto 32px; line-height: 1.6; }
+    .gs-btn {
+      display: inline-block;
+      background: transparent;
+      color: var(--gold);
+      border: 1.5px solid var(--gold);
+      padding: 18px 48px;
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 22px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .gs-btn:hover { background: rgba(201,168,76,0.08); }
+    .chat-fab {
+      position: fixed; right: 20px; bottom: 20px;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--gold);
+      color: var(--text);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+      z-index: 50;
+    }
+    .chat-fab svg { width: 22px; height: 22px; }
+
+    /* ═══════════ FOOTER ═══════════ */
+    .footer { background: var(--cream); padding: 36px 24px 28px; border-top: 1px solid rgba(29,35,42,0.06); }
+    .footer-inner {
+      display: flex; flex-direction: column; gap: 14px; align-items: center;
+      text-align: center;
+    }
+    .footer-name {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 18px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--text);
+    }
+    .footer-tag { font-size: 11px; color: var(--text-muted); font-style: italic; }
+    .footer-meta { font-size: 10px; color: var(--text-muted); letter-spacing: 0.18em; text-transform: uppercase; }
+
+    /* ═══════════ MODAL ═══════════ */
+    .modal {
+      position: fixed; inset: 0; z-index: 100;
+      background: rgba(0,0,0,0.92);
+      display: none; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .modal.open { display: flex; }
+    .modal-box {
+      background: var(--dark);
+      border: 1px solid rgba(201,168,76,0.4);
+      border-radius: 6px;
+      padding: 36px;
+      max-width: 460px;
+      width: 100%;
+      position: relative;
+    }
+    .modal-close {
+      position: absolute; top: 12px; right: 14px;
+      color: var(--text-light); font-size: 22px; line-height: 1;
+      width: 28px; height: 28px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .modal-close:hover { color: var(--gold); }
+    .modal h3 { font-size: 24px; color: var(--text-light); margin-bottom: 4px; }
+    .modal .plan-label { font-size: 10px; color: var(--gold); letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 20px; display: block; }
+    .form-row { margin-bottom: 12px; }
+    .form-row label { display: block; font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 5px; }
+    .form-row input, .form-row textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(201,168,76,0.4);
+      color: var(--text-light);
+      padding: 10px 12px;
+      font-size: 13px;
+      font-family: inherit;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+    .form-row input:focus, .form-row textarea:focus { outline: none; border-color: var(--gold); }
+    .form-row textarea { resize: vertical; min-height: 70px; }
+    .form-submit { width: 100%; margin-top: 8px; padding: 14px; }
+    .form-status { font-size: 11px; margin-top: 10px; min-height: 14px; }
+    .form-status.success { color: #6abf7b; }
+    .form-status.error { color: #e88a8a; }
+
+    /* ═══════════ RESPONSIVE ═══════════ */
+    @media (min-width: 640px) {
+      .container { padding: 0 32px; }
+      .header { padding: 22px 32px; }
+      .timeline-grid { grid-template-columns: repeat(5, 1fr); }
+      .fivecol-grid { grid-template-columns: repeat(5, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr 1fr; max-width: 720px; margin: 0 auto; }
+    }
+    @media (min-width: 900px) {
+      .container { padding: 0 48px; }
+      .header { padding: 24px 48px; }
+      .hero { padding: 60px 0 80px; }
+      .hero-grid { grid-template-columns: 1.1fr 1fr; gap: 60px; }
+      .pricing { padding: 72px 0 80px; }
+      .timeline { padding: 56px 0 72px; }
+      .fivecol { padding: 72px 0; }
+      .get-started { padding: 80px 24px 120px; }
+      .footer { padding: 48px 24px 32px; }
+      .footer-inner { flex-direction: row; justify-content: space-between; text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header class="header">
+    <div class="header-l">
+      <div class="header-logo">
+        <img src="meridian-logo.png" alt="Meridian" />
+      </div>
+      <div class="header-tag">
+        <div class="title">Meridian</div>
+        <div class="sub">Client Retention Service</div>
+      </div>
+    </div>
+    <div class="header-r">
+      <a href="#login" class="header-login">Log In</a>
+      <button class="header-cta" data-action="video">
+        <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        Watch the Story
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <h1>
+            Presence
+            <span class="italic">Without Pressure.</span>
+          </h1>
+          <div class="hero-sub">
+            <p>Nobody remembers another email.</p>
+            <p>People remember <em>moments</em>.</p>
+            <p>Meridian creates those moments for you.</p>
+          </div>
+          <div class="hero-ctas">
+            <button class="btn btn-primary" data-action="video">
+              <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+              Watch the Story
+            </button>
+            <a href="#timeline" class="btn btn-ghost">See How It Works</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-label="Cards, keys, and coffee on a warm table">
+            <defs>
+              <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#e8dfd0"/>
+                <stop offset="60%" stop-color="#d4c8b0"/>
+                <stop offset="100%" stop-color="#b8a48a"/>
+              </linearGradient>
+              <linearGradient id="card" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#f5f0e6"/>
+                <stop offset="100%" stop-color="#e6dccb"/>
+              </linearGradient>
+              <linearGradient id="wood" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#7a5a3e"/>
+                <stop offset="100%" stop-color="#5a3f28"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#bg)"/>
+            <!-- wood surface bottom -->
+            <rect y="320" width="400" height="180" fill="url(#wood)" opacity="0.6"/>
+            <line x1="0" y1="320" x2="400" y2="320" stroke="#3a2814" stroke-width="0.5" opacity="0.4"/>
+            <!-- greenery top right -->
+            <g opacity="0.85">
+              <ellipse cx="340" cy="60" rx="55" ry="48" fill="#5a6b48"/>
+              <ellipse cx="365" cy="35" rx="32" ry="28" fill="#6a7b58"/>
+              <ellipse cx="320" cy="40" rx="28" ry="25" fill="#4a5b38"/>
+              <path d="M 340 90 Q 350 130 360 170" stroke="#3a4a28" stroke-width="2" fill="none"/>
+            </g>
+            <!-- coffee mug right -->
+            <g transform="translate(265, 150)">
+              <ellipse cx="50" cy="22" rx="50" ry="12" fill="#e6dccb"/>
+              <ellipse cx="50" cy="22" rx="46" ry="9" fill="#3a2614"/>
+              <path d="M 0 22 Q 0 88 50 88 Q 100 88 100 22 L 100 22 L 0 22 Z" fill="#e6dccb" stroke="#a89878" stroke-width="0.5"/>
+              <ellipse cx="50" cy="22" rx="46" ry="9" fill="#3a2614"/>
+              <path d="M 100 32 Q 132 36 132 56 Q 132 78 100 72" fill="none" stroke="#a89878" stroke-width="3"/>
+            </g>
+            <!-- photo top-left -->
+            <g transform="translate(28, 60)">
+              <rect width="135" height="100" fill="#a89878" stroke="#c9bfb0" stroke-width="2"/>
+              <rect x="6" y="6" width="123" height="88" fill="#b8a48a"/>
+              <!-- two people silhouettes -->
+              <ellipse cx="45" cy="40" rx="14" ry="16" fill="#5a4530"/>
+              <ellipse cx="85" cy="42" rx="14" ry="16" fill="#3a2a1a"/>
+              <rect x="20" y="56" width="55" height="38" fill="#6a5544"/>
+              <rect x="60" y="58" width="60" height="36" fill="#7a6554"/>
+            </g>
+            <!-- card center with handwritten text -->
+            <g transform="translate(75, 215)">
+              <rect width="240" height="155" fill="url(#card)" stroke="#c9bfb0" stroke-width="0.5"/>
+              <text x="22" y="38" font-family="'Playfair Display', Georgia, serif" font-size="14" font-style="italic" fill="#3a2a1a">Thinking of you.</text>
+              <text x="22" y="58" font-family="'Playfair Display', Georgia, serif" font-size="14" font-style="italic" fill="#3a2a1a">Hope you&apos;re still</text>
+              <text x="22" y="78" font-family="'Playfair Display', Georgia, serif" font-size="14" font-style="italic" fill="#3a2a1a">loving the home.</text>
+              <!-- gold seal -->
+              <circle cx="120" cy="115" r="16" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+              <text x="120" y="121" text-anchor="middle" font-family="'Playfair Display', Georgia, serif" font-size="18" fill="#C9A84C">M</text>
+            </g>
+            <!-- keys bottom left -->
+            <g transform="translate(60, 415)">
+              <circle cx="14" cy="14" r="10" fill="none" stroke="#a08530" stroke-width="3"/>
+              <circle cx="14" cy="14" r="4" fill="#a08530"/>
+              <line x1="24" y1="14" x2="78" y2="14" stroke="#a08530" stroke-width="3"/>
+              <line x1="60" y1="14" x2="60" y2="22" stroke="#a08530" stroke-width="3"/>
+              <line x1="70" y1="14" x2="70" y2="20" stroke="#a08530" stroke-width="3"/>
+            </g>
+            <!-- envelope bottom right -->
+            <g transform="translate(95, 400)" opacity="0.85">
+              <path d="M 0 30 L 130 0 L 260 30 L 260 80 L 0 80 Z" fill="#d4c8a8" stroke="#a89878" stroke-width="0.5"/>
+              <path d="M 0 30 L 130 70 L 260 30" fill="none" stroke="#a89878" stroke-width="0.5"/>
+            </g>
+          </svg>
+          <div class="hero-corner tl"></div>
+          <div class="hero-corner tr"></div>
+          <div class="hero-corner bl"></div>
+          <div class="hero-corner br"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ QUOTE BAND ═══ -->
+  <section class="quote-band">
+    <div class="container">
+      <p>The difference between a closed transaction and a lifelong advocate is what happens <em>after</em> the closing table.</p>
+    </div>
+  </section>
+
+  <!-- ═══ PRICING ═══ -->
+  <section class="pricing">
+    <div class="container">
+      <div class="pricing-grid">
+        <div class="plan" data-plan="Threshold">
+          <div class="plan-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="3" y="8" width="18" height="13" rx="1"/>
+              <path d="M3 12h18"/>
+              <path d="M12 8v13"/>
+              <path d="M12 8c-2-3-6-3-6 0"/>
+              <path d="M12 8c2-3 6-3 6 0"/>
+            </svg>
+          </div>
+          <div class="plan-name">Threshold</div>
+          <div class="plan-tag">Full Moment Program</div>
+          <div class="plan-price"><span class="dollar">$</span><span class="amount">99</span></div>
+          <div class="plan-fee">Client One-Time Fee</div>
+          <div class="plan-divider"></div>
+          <p class="plan-desc">Personalized cards and curated gifts delivered at the right moments throughout the year to keep you top of mind.</p>
+          <button class="btn btn-primary plan-cta" data-action="enroll" data-plan="Threshold">Get Started</button>
+        </div>
+        <div class="plan featured" data-plan="Foundation">
+          <div class="plan-badge">Most Popular</div>
+          <div class="plan-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 7l5-3 5 3 5-3 5 3v13l-5 3-5-3-5 3-5-3z"/>
+              <path d="M7 4v16"/>
+              <path d="M12 7v16"/>
+              <path d="M17 4v16"/>
+            </svg>
+          </div>
+          <div class="plan-name">Foundation</div>
+          <div class="plan-tag">Premier Moment Program</div>
+          <div class="plan-price"><span class="dollar">$</span><span class="amount">199</span></div>
+          <div class="plan-fee">Client One-Time Fee</div>
+          <div class="plan-divider"></div>
+          <p class="plan-desc">Our complete concierge experience designed to keep you remembered long after closing with personalized cards, curated gifts, and multi-year follow-through.</p>
+          <button class="btn btn-primary plan-cta" data-action="enroll" data-plan="Foundation">Get Started</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ TIMELINE ═══ -->
+  <section class="timeline" id="timeline">
+    <div class="container">
+      <div class="timeline-grid">
+        <div class="step">
+          <div class="step-image">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="t1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#5a4530"/><stop offset="100%" stop-color="#2a1a10"/></linearGradient></defs>
+              <rect width="200" height="150" fill="url(#t1)"/>
+              <ellipse cx="70" cy="100" rx="38" ry="18" fill="#d4a574" opacity="0.85"/>
+              <ellipse cx="130" cy="100" rx="38" ry="18" fill="#c9956a" opacity="0.85"/>
+              <circle cx="100" cy="85" r="9" fill="none" stroke="#C9A84C" stroke-width="2.5"/>
+              <line x1="109" y1="85" x2="128" y2="85" stroke="#C9A84C" stroke-width="2.5"/>
+              <line x1="120" y1="85" x2="120" y2="92" stroke="#C9A84C" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="step-num">1</div>
+          <div class="step-name">Closing Day</div>
+          <div class="step-desc">A new beginning.</div>
+        </div>
+        <div class="step">
+          <div class="step-image">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="t2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e8dfd0"/><stop offset="100%" stop-color="#a89878"/></linearGradient></defs>
+              <rect width="200" height="150" fill="url(#t2)"/>
+              <rect x="50" y="40" width="100" height="70" fill="#f5f0e6"/>
+              <text x="100" y="68" text-anchor="middle" font-family="'Playfair Display', serif" font-size="11" font-style="italic" fill="#3a2a1a">Thank you</text>
+              <circle cx="100" cy="88" r="7" fill="none" stroke="#C9A84C" stroke-width="1.5"/>
+              <text x="100" y="92" text-anchor="middle" font-family="'Playfair Display', serif" font-size="9" fill="#C9A84C">M</text>
+            </svg>
+          </div>
+          <div class="step-num">2</div>
+          <div class="step-name">First Card</div>
+          <div class="step-desc">Thoughtful touch, right on time.</div>
+        </div>
+        <div class="step">
+          <div class="step-image">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="t3" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#6a7b58"/><stop offset="100%" stop-color="#3a4a28"/></linearGradient></defs>
+              <rect width="200" height="150" fill="url(#t3)"/>
+              <path d="M 88 80 L 92 132 L 108 132 L 112 80 Z" fill="#d4cfc6" stroke="#a89878" stroke-width="0.5"/>
+              <rect x="86" y="74" width="16" height="6" fill="#a89878"/>
+              <circle cx="85" cy="55" r="10" fill="#e8c87a"/>
+              <circle cx="100" cy="40" r="12" fill="#C9A84C"/>
+              <circle cx="115" cy="55" r="10" fill="#e8c87a"/>
+              <line x1="85" y1="65" x2="93" y2="78" stroke="#5a6b48" stroke-width="2.5"/>
+              <line x1="100" y1="52" x2="98" y2="78" stroke="#5a6b48" stroke-width="2.5"/>
+              <line x1="115" y1="65" x2="107" y2="78" stroke="#5a6b48" stroke-width="2.5"/>
+            </svg>
+          </div>
+          <div class="step-num">3</div>
+          <div class="step-name">Anniversary</div>
+          <div class="step-desc">Celebrating the moments that matter.</div>
+        </div>
+        <div class="step">
+          <div class="step-image">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="t4" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#8a6a48"/><stop offset="100%" stop-color="#3a2a1a"/></linearGradient></defs>
+              <rect width="200" height="150" fill="url(#t4)"/>
+              <rect x="60" y="55" width="80" height="55" fill="#2a1a10" stroke="#C9A84C" stroke-width="0.5"/>
+              <rect x="60" y="80" width="80" height="3" fill="#C9A84C"/>
+              <rect x="98" y="55" width="4" height="55" fill="#C9A84C"/>
+              <circle cx="90" cy="78" r="6" fill="#C9A84C"/>
+              <circle cx="110" cy="78" r="6" fill="#C9A84C"/>
+              <path d="M 90 72 L 85 60 L 95 60 Z" fill="#C9A84C"/>
+              <path d="M 110 72 L 105 60 L 115 60 Z" fill="#C9A84C"/>
+            </svg>
+          </div>
+          <div class="step-num">4</div>
+          <div class="step-name">Thoughtful Gift</div>
+          <div class="step-desc">Meaningful. Personal. Unexpected.</div>
+        </div>
+        <div class="step">
+          <div class="step-image">
+            <svg viewBox="0 0 200 150" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+              <defs><linearGradient id="t5" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#3a3025"/><stop offset="100%" stop-color="#1a1410"/></linearGradient></defs>
+              <rect width="200" height="150" fill="url(#t5)"/>
+              <rect x="70" y="20" width="60" height="105" rx="8" fill="#0d0f18" stroke="#C9A84C" stroke-width="1.5"/>
+              <rect x="75" y="38" width="50" height="4" fill="#C9A84C"/>
+              <text x="100" y="62" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" font-weight="600" fill="#C9A84C">Referral</text>
+              <text x="100" y="78" text-anchor="middle" font-family="Inter, sans-serif" font-size="6" fill="#8a8a9a">+1 555-123-4567</text>
+              <circle cx="100" cy="100" r="14" fill="#16a34a"/>
+              <path d="M 93 100 L 99 106 L 108 95" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="step-num">5</div>
+          <div class="step-name">Referral Call</div>
+          <div class="step-desc">The best kind of follow-up.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FIVE COLUMN ═══ -->
+  <section class="fivecol">
+    <div class="container">
+      <div class="fivecol-grid">
+        <div class="col">
+          <div class="col-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+            Who We Are
+          </div>
+          <p>Meridian is the only full-service client retention company built for the premier real estate agent.</p>
+        </div>
+        <div class="col">
+          <div class="col-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="8" width="18" height="13" rx="1"/><path d="M3 12h18"/><path d="M12 8v13"/><path d="M12 8c-2-3-6-3-6 0"/><path d="M12 8c2-3 6-3 6 0"/></svg>
+            What We Do
+          </div>
+          <p>You send us your client list. We handle everything else. The cards. The gifts. The timing. The follow-through. You never think about it again.</p>
+        </div>
+        <div class="col">
+          <div class="col-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+            Why It Matters
+          </div>
+          <p>You already paid to acquire that client. You already delivered. The second deal should find you. When the gap between closing and referral is silence, there is no referral.</p>
+        </div>
+        <div class="col">
+          <div class="col-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            How It Works
+          </div>
+          <ul class="col-list">
+            <li>Send us your client list.</li>
+            <li>We build the program. Personalized cards and curated gifts delivered at exactly the right moment, for years.</li>
+            <li>Referrals find you.</li>
+          </ul>
+        </div>
+        <div class="col">
+          <div class="col-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2 L15 9 L22 10 L17 15 L18 22 L12 18 L6 22 L7 15 L2 10 L9 9 Z"/></svg>
+            The Promise
+          </div>
+          <p>We are not selling your clients anything. We are not selling loyalty. One moment at a time — until you are the only agent they will ever call.</p>
+          <p class="col-italic">This is how legacies are built.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DARK BAND: PRESENCE WITHOUT PRESSURE ═══ -->
+  <section class="band">
+    <div class="band-kicker">Presence Without Pressure</div>
+    <div class="band-domain">clientretentionservice.com</div>
+  </section>
+
+  <!-- ═══ GET STARTED FREE CTA ═══ -->
+  <section class="get-started" id="get-started">
+    <h2>Get Started Free</h2>
+    <p>Tell us where to send your consultation. No pitch. No pressure. Just the first moment of a long relationship.</p>
+    <button class="gs-btn" data-action="enroll" data-plan="Banner">Get Started Free</button>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-name">Meridian</div>
+      <div class="footer-tag">Turn every sale into a lifetime relationship.</div>
+      <div class="footer-meta">© 2026 Client Retention Service</div>
+    </div>
+  </footer>
+
+  <!-- ═══ CHAT FAB ═══ -->
+  <a href="mailto:hello@clientretentionservice.com" class="chat-fab" aria-label="Email Meridian">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+    </svg>
+  </a>
+
+  <!-- ═══ ENROLL / CONTACT MODAL ═══ -->
+  <div class="modal" id="enroll-modal" role="dialog" aria-modal="true" aria-labelledby="enroll-title">
+    <div class="modal-box">
+      <button class="modal-close" data-action="close" aria-label="Close">×</button>
+      <h3 id="enroll-title">Get Started</h3>
+      <span class="plan-label" id="enroll-plan">Foundation</span>
+      <form id="enroll-form">
+        <div class="form-row">
+          <label for="f-name">Name *</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name">
+        </div>
+        <div class="form-row">
+          <label for="f-email">Email *</label>
+          <input id="f-email" name="email" type="email" required autocomplete="email">
+        </div>
+        <div class="form-row">
+          <label for="f-phone">Phone *</label>
+          <input id="f-phone" name="phone" type="tel" required autocomplete="tel">
+        </div>
+        <div class="form-row">
+          <label for="f-brokerage">Brokerage</label>
+          <input id="f-brokerage" name="brokerage" type="text" autocomplete="organization">
+        </div>
+        <div class="form-row">
+          <label for="f-notes">Anything we should know?</label>
+          <textarea id="f-notes" name="notes" rows="2"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary form-submit">Request a Call</button>
+        <div class="form-status" id="form-status"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ═══ VIDEO MODAL ═══ -->
+  <div class="modal" id="video-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="text-align:center; padding: 60px 36px;">
+      <button class="modal-close" data-action="close" aria-label="Close">×</button>
+      <svg viewBox="0 0 24 24" fill="currentColor" style="width:48px;height:48px;color:var(--gold);margin:0 auto 18px;display:block;"><polygon points="5,3 19,12 5,21"/></svg>
+      <h3 style="margin-bottom: 8px;">The Meridian Story</h3>
+      <p style="font-size: 13px; color: var(--text-dim);">Video coming soon.</p>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      // Resend (or any webhook) endpoint — set this to your Resend inbound webhook
+      // or a serverless function. The form gracefully degrades to mailto: if unset.
+      var LEAD_ENDPOINT = window.MERIDIAN_LEAD_ENDPOINT || '';
+
+      // Modal helpers
+      function openModal(id) { document.getElementById(id).classList.add('open'); }
+      function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+      function anyOpen() { return document.querySelector('.modal.open'); }
+
+      // Action buttons
+      document.addEventListener('click', function (e) {
+        var t = e.target.closest('[data-action]');
+        if (!t) return;
+        var action = t.getAttribute('data-action');
+        if (action === 'video') {
+          openModal('video-modal');
+        } else if (action === 'enroll') {
+          var plan = t.getAttribute('data-plan') || 'Foundation';
+          document.getElementById('enroll-plan').textContent = plan;
+          document.getElementById('enroll-form').reset();
+          document.getElementById('form-status').textContent = '';
+          document.getElementById('form-status').className = 'form-status';
+          openModal('enroll-modal');
+        } else if (action === 'close') {
+          var m = t.closest('.modal');
+          if (m) m.classList.remove('open');
+        }
+      });
+
+      // Close modal on backdrop click
+      document.querySelectorAll('.modal').forEach(function (m) {
+        m.addEventListener('click', function (e) {
+          if (e.target === m) m.classList.remove('open');
+        });
+      });
+
+      // Esc closes
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && anyOpen()) {
+          document.querySelectorAll('.modal.open').forEach(function (m) { m.classList.remove('open'); });
+        }
+      });
+
+      // Form submit
+      var form = document.getElementById('enroll-form');
+      var status = document.getElementById('form-status');
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        status.textContent = 'Sending…';
+        status.className = 'form-status';
+
+        var data = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          brokerage: form.brokerage.value.trim(),
+          notes: form.notes.value.trim(),
+          plan: document.getElementById('enroll-plan').textContent,
+          source: 'meridian-landing-html',
+          ts: new Date().toISOString()
+        };
+
+        function done(ok, msg) {
+          if (ok) {
+            status.textContent = 'Thank you. We will be in touch within 24 hours.';
+            status.className = 'form-status success';
+            setTimeout(function () { document.getElementById('enroll-modal').classList.remove('open'); }, 1800);
+          } else {
+            status.textContent = msg || 'Could not send. Please email hello@clientretentionservice.com directly.';
+            status.className = 'form-status error';
+          }
+        }
+
+        if (!LEAD_ENDPOINT) {
+          // No endpoint configured — fall back to mailto with prefilled subject.
+          var subject = encodeURIComponent('Meridian — ' + data.plan + ' interest');
+          var body = encodeURIComponent(
+            'Name: ' + data.name + '\n' +
+            'Email: ' + data.email + '\n' +
+            'Phone: ' + data.phone + '\n' +
+            'Brokerage: ' + data.brokerage + '\n' +
+            'Notes: ' + data.notes + '\n'
+          );
+          window.location.href = 'mailto:hello@clientretentionservice.com?subject=' + subject + '&body=' + body;
+          done(true, 'Opening your email client…');
+          return;
+        }
+
+        fetch(LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('HTTP ' + r.status)); })
+          .then(function () { done(true); })
+          .catch(function (err) { done(false, err.message); });
+      });
+    })();
+  </script>
+</body>
+</html>

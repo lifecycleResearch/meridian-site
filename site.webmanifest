@@ -1,0 +1,12 @@
+{
+  "name": "Client Retention Service",
+  "short_name": "CRS",
+  "description": "Turn every sale into a lifetime relationship.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0d0f18",
+  "theme_color": "#11141d",
+  "icons": [
+    { "src": "/meridian-logo.png", "sizes": "1254x1254", "type": "image/png" }
+  ]
+}
