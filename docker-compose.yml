@@ -1,0 +1,6 @@
+services:
+  meridian-site:
+    build: .
+    container_name: meridian-site
+    ports: ["80:80"]
+    restart: unless-stopped
